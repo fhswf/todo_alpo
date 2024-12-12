@@ -55,3 +55,13 @@ Daraufhin folgte die Integration von Sonarqube um regelmäßige statische Code a
 [Sonarqube Project TODO_ALPO](https://hopper.fh-swf.de/sonarqube/dashboard?id=todo_alpo&codeScope=overall)
 
 Es stellte sich heraus, dass es einige Kleinigkeiten gibt, welche ich verbessern kann. Ich entschied mich Medium bis High klassifizierte Probleme in den Kategorien "Maintainability" und "Reliability" zu beheben.
+
+## Verbesserungen
+
+### Security Hotspots
+
+Die Quality gate von Sonarqube läuft nun erfolgreich durch. Jedoch gibt es noch Security Hotspots. Nach einem kleinen Review entschied ich mich die 2 gefundenen Security Hotspots im Frontend von Sonarqube zu markieren, um Sonarqube zu zeigen, dass ich mir um die Probleme bewusst bin. 
+
+Ein Hotspot war ein angeblicher Credential leak, welcher aber nur in einem Test vorkam. Dieser wurde als akzeptiert (acknowledged) markiert.
+
+Ein weiterer Hotspot war, dass Sonarqube davon ausgeht, dass Express Versionsinformationen in seinem Webserver exposed. Dies kann natürlich von Angreifern genutzt werden um herauszufinden welche Vulnerabilities in einer bestimmten Webserver Version existieren, ist aber in diesem Kontext nicht von großer Relevanz und wurde daher als sicher (safe) markiert.

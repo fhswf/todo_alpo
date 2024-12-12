@@ -43,3 +43,7 @@ Ich entscheide mich die Authentifizierungslogik in den Tests zu mocken. Dies mac
 ### Test 4, 5
 
 Die beiden Teste schlagen fehl durch fehlende Validierung der Daten auf der Anwendungsseite. Dies ist schnell behoben durch eine Simple Validierungsimplementation. Danach liefen die Teste erfolgreich durch.
+
+## Integration von CI Tests
+
+Nachdem alle Tests erfolgreich durchlaufen sorgte ich für die continous integration des Projekts mithilfe der Implementierung einer Github Action. Dies funktionierte auf anhieb.

@@ -109,7 +109,6 @@ const todoValidationRules = [
 */
 let authenticate = (req, res, next) => {
     const requiredHeader = 'authorization';
-    console.log(req.headers)
     if (req.headers[requiredHeader] == 'Bearer 123') {
         next();
     } else {

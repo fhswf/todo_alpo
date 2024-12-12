@@ -47,3 +47,7 @@ Die beiden Teste schlagen fehl durch fehlende Validierung der Daten auf der Anwe
 ## Integration von CI Tests
 
 Nachdem alle Tests erfolgreich durchlaufen sorgte ich für die continous integration des Projekts mithilfe der Implementierung einer Github Action. Dies funktionierte auf anhieb.
+
+## Sonarqube integration
+
+Daraufhin folgte die Integration von Sonarqube um regelmäßige statische Code analysen automatisiert durchführen zu können.

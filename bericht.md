@@ -65,3 +65,7 @@ Die Quality gate von Sonarqube läuft nun erfolgreich durch. Jedoch gibt es noch
 Ein Hotspot war ein angeblicher Credential leak, welcher aber nur in einem Test vorkam. Dieser wurde als akzeptiert (acknowledged) markiert.
 
 Ein weiterer Hotspot war, dass Sonarqube davon ausgeht, dass Express Versionsinformationen in seinem Webserver exposed. Dies kann natürlich von Angreifern genutzt werden um herauszufinden welche Vulnerabilities in einer bestimmten Webserver Version existieren, ist aber in diesem Kontext nicht von großer Relevanz und wurde daher als sicher (safe) markiert.
+
+### Code coverage
+
+Eine Sache störte mich noch. Ich habe bisher 0% Code coverage. Ich machte mich also ans Werk und began weitere Tests zu schreiben um mehr Funktionalität des Programs abzudecken. Eine Vermutung macht sich jedoch breit, dass die Code Coverade, da es ein API Test ist, sich nicht erhöhen wird. Ich müsste unit tests erstellen und Funktionen in dem Hauptteil des Programs abkapseln. Da das Hauptprogram aber sehr wenig Logik enthält entschied ich mich dazu es bei erweiterten API Tests zu belassen.

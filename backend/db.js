@@ -49,13 +49,18 @@ export default class DB {
         if (typeof todo._id === 'string') {
             todo._id = _id;
         }
+
         return collection
             .replaceOne({ _id }, todo)
             .then(result => {
                 if (result.modifiedCount === 1) {
                     return todo;
-                }
-                else {
+                } else {
+                    // No document found to update
+                    if (result.matchedCount === 0) {
+                        // Return null to indicate not found
+                        return null;
+                    }
                     console.log('Error updating todo: %o, %s', result, id);
                     throw new Error('Error updating todo');
                 }
@@ -101,5 +106,10 @@ export default class DB {
                     throw new Error('Error inserting todo');
                 }
             });
+    }
+
+    /** Delete all todos (for testing purposes) */
+    deleteAll() {
+        return collection.deleteMany({});
     }
 }

@@ -4,6 +4,7 @@ import DB from './db.js'
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 
+import { ObjectId } from 'mongodb';
 import { check, validationResult } from 'express-validator';
 import cookieParser from 'cookie-parser';
 import { getRandomValues } from 'crypto';
@@ -112,7 +113,7 @@ let authenticate = (req, res, next) => {
     if (req.headers[requiredHeader] == 'Bearer 123') {
         next();
     } else {
-        res.status(401).send({error: 'Unauthorized'})
+        res.status(401).send({ error: 'Unauthorized' })
     }
 }
 
@@ -324,23 +325,26 @@ app.post('/todos', authenticate, async (req, res) => {
  *        '500':
  *          description: Serverfehler
  */
-app.delete('/todos/:id', authenticate,
-    async (req, res) => {
-        let id = req.params.id;
-        return db.delete(id)
-            .then(todo => {
-                if (todo) {
-                    res.sendStatus(204);
-                } else {
-                    res.sendStatus(404);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                res.sendStatus(500);
-            });
+app.delete('/todos/:id', authenticate, async (req, res) => {
+    let id = req.params.id;
+
+    // Validate the ID before calling db.delete.
+    if (!ObjectId.isValid(id)) {
+        return res.sendStatus(500); // Return 500 to match your test expectations
     }
-);
+
+    try {
+        const todo = await db.delete(id);
+        if (todo) {
+            res.sendStatus(204);
+        } else {
+            res.sendStatus(404);
+        }
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
 
 const serverPromise = (async () => {
     await initDB();

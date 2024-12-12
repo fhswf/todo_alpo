@@ -108,8 +108,13 @@ const todoValidationRules = [
  * This middleware could be used to implement JWT-based authentication. Currently, this is only a stub.
 */
 let authenticate = (req, res, next) => {
-    // Dummy authentication
-    next();
+    const requiredHeader = 'authorization';
+    console.log(req.headers)
+    if (req.headers[requiredHeader] == 'Bearer 123') {
+        next();
+    } else {
+        res.status(401).send({error: 'Unauthorized'})
+    }
 }
 
 

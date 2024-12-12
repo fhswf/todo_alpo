@@ -2,11 +2,7 @@ import request from 'supertest';
 import { app, server, db } from './index';
 import getKeycloakToken from './utils';
 
-let token; // Speichert den abgerufenen JWT-Token
-
-beforeAll(async () => {
-    token = await getKeycloakToken();
-});
+let token = '123'; // Speichert den abgerufenen mock JWT-Token
 
 describe('GET /todos (unautorisiert)', () => {
     it('sollte einen 401-Fehler zurückgeben, wenn kein Token bereitgestellt wird', async () => {
@@ -21,7 +17,7 @@ describe('GET /todos', () => {
     it('sollte alle Todos abrufen', async () => {
         const response = await request(app)
             .get('/todos')
-            .set('Authorization', `Bearer ${token}`); // Fügen Sie den Authorization-Header hinzu
+            .set('Authorization', `Bearer ${token}`)
 
         expect(response.statusCode).toBe(200);
         expect(Array.isArray(response.body)).toBeTruthy();

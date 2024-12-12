@@ -40,5 +40,6 @@ Scheinbar, scheint die Authentifizierung nicht richtig implementiert zu sein. Na
 
 Ich entscheide mich die Authentifizierungslogik in den Tests zu mocken. Dies mache ich indem ich in der Anwendung auf einen bestimmten Bearer Token überprüfe ('123'). Dies behebt Test 1.
 
-### Test 4
+### Test 4, 5
 
+Die beiden Teste schlagen fehl durch fehlende Validierung der Daten auf der Anwendungsseite. Dies ist schnell behoben durch eine Simple Validierungsimplementation. Danach liefen die Teste erfolgreich durch.

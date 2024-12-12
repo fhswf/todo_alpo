@@ -274,23 +274,35 @@ app.put('/todos/:id', authenticate,
  *     '500':
  *       description: Serverfehler
  */
-app.post('/todos', authenticate,
-    async (req, res) => {
-        let todo = req.body;
-        if (!todo) {
-            res.sendStatus(400, { message: "Todo fehlt" });
-            return;
-        }
-        return db.insert(todo)
-            .then(todo => {
-                res.status(201).send(todo);
-            })
-            .catch(err => {
-                console.log(err);
-                res.sendStatus(500);
-            });
+app.post('/todos', authenticate, async (req, res) => {
+    const allowedFields = ['title', 'due', 'status']; // Define allowed fields
+    const todo = req.body;
+
+    // Check if request body is provided
+    if (!todo) {
+        return res.status(400).json({ message: "Todo fehlt" });
     }
-);
+
+    // Check for invalid fields
+    const extraFields = Object.keys(todo).filter(key => !allowedFields.includes(key));
+    if (extraFields.length > 0) {
+        return res.status(400).json({ error: 'Bad Request', message: `Ungültige Felder: ${extraFields.join(', ')}` });
+    }
+
+    // Validate required fields
+    const missingFields = allowedFields.filter(key => !(key in todo));
+    if (missingFields.length > 0) {
+        return res.status(400).json({ error: 'Bad Request', message: `Fehlende Felder: ${missingFields.join(', ')}` });
+    }
+
+    try {
+        const newTodo = await db.insert(todo); // Insert todo into the database
+        res.status(201).json(newTodo); // Return created todo
+    } catch (error) {
+        console.error('Fehler beim Erstellen des Todos:', error);
+        res.status(500).json({ error: 'Serverfehler beim Erstellen des Todos' });
+    }
+});
 
 /** Delete a todo by id.
  * @swagger

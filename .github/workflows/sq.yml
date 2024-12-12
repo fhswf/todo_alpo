@@ -10,14 +10,21 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    permissions: read-all
+    permissions: write-all
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: sonarsource/sonarqube-scan-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SHITHUB_TOKEN }} # had to rename GITHUB_TOKEN, because GitHub doesnt allow creating secrets with the prefix GITHUB_ anymore
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
-          SONAR_ROOT_CERT: ${{ vars.SONAR_ROOT_CERT }}
+          # SONAR_ROOT_CERT: ${{ vars.SONAR_ROOT_CERT }}
+        with:
+          # Additional arguments for the sonarcloud scanner
+          args:
+            # Unique key of your project. You can find it in SonarQube > [my project] > Project Information (top-right menu)
+            # mandatory
+            -Dsonar.projectKey=todo_alpo
+            -Dsonar.verbose=false

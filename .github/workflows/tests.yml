@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+      - feature/abgabe-alex-p
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo
+        ports: 
+        - 27017:27017
+    
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v4
+      - name: npm install
+        working-directory: ./backend
+        run: npm install
+      - name: Run Tests
+        working-directory: ./backend
+        run: npm test

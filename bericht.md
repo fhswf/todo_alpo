@@ -69,3 +69,5 @@ Ein weiterer Hotspot war, dass Sonarqube davon ausgeht, dass Express Versionsinf
 ### Code coverage
 
 Eine Sache störte mich noch. Ich habe bisher 0% Code coverage. Ich machte mich also ans Werk und began weitere Tests zu schreiben um mehr Funktionalität des Programs abzudecken. Eine Vermutung macht sich jedoch breit, dass die Code Coverade, da es ein API Test ist, sich nicht erhöhen wird. Ich müsste unit tests erstellen und Funktionen in dem Hauptteil des Programs abkapseln. Da das Hauptprogram aber sehr wenig Logik enthält entschied ich mich dazu es bei erweiterten API Tests zu belassen.
+
+Nun schlug die Quality gate durch die fehlende Anzahl an Code Coverage bei neuem Code fehl und ich knickte ein und implementierte Unit tests, zumindest für die Datenbank Klasse.

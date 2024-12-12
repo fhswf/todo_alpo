@@ -86,7 +86,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 
 /** global instance of our database */
-let db = new DB();
+const db = new DB();
 
 /** Initialize database connection */
 async function initDB() {
@@ -342,14 +342,13 @@ app.delete('/todos/:id', authenticate,
     }
 );
 
+const serverPromise = (async () => {
+    await initDB();
+    const server = app.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+    });
+    return server;
+})();
 
+export { app, serverPromise as server, db };
 
-let server;
-await initDB()
-    .then(() => {
-        server = app.listen(PORT, () => {
-            console.log(`Server listening on port ${PORT}`);
-        })
-    })
-
-export { app, server, db }

@@ -50,4 +50,8 @@ Nachdem alle Tests erfolgreich durchlaufen sorgte ich für die continous integra
 
 ## Sonarqube integration
 
-Daraufhin folgte die Integration von Sonarqube um regelmäßige statische Code analysen automatisiert durchführen zu können.
+Daraufhin folgte die Integration von Sonarqube um regelmäßige statische Code analysen automatisiert durchführen zu können. Nach ein paar Startproblemen, welche daraus entstanden sind, dass ich mir nicht bewusst war wo ich die Werte der Umgebungsvariablen/ Secrets bekommen soll lief sonarqube durch.
+
+[Sonarqube Project TODO_ALPO](https://hopper.fh-swf.de/sonarqube/dashboard?id=todo_alpo&codeScope=overall)
+
+Es stellte sich heraus, dass es einige Kleinigkeiten gibt, welche ich verbessern kann. Ich entschied mich Medium bis High klassifizierte Probleme in den Kategorien "Maintainability" und "Reliability" zu beheben.

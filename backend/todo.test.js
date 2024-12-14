@@ -2,6 +2,7 @@ import request from 'supertest';
 import { app, server, db } from './index';
 import getKeycloakToken from './utils';
 
+const serv = await server
 let token = '123'; // Speichert den abgerufenen mock JWT-Token
 
 describe('GET /todos (unautorisiert)', () => {
@@ -86,8 +87,8 @@ describe('GET /todos/:id', () => {
             .post('/todos')
             .set('Authorization', `Bearer ${token}`)
             .send(newTodo);
-
-        const id = response.body._id;
+      
+        const id = response._body._id;
 
         const getResponse = await request(app)
             .get(`/todos/${id}`)
@@ -295,6 +296,6 @@ describe('Empty Database Scenario', () => {
 });
 
 afterAll(async () => {
-    (await server).close()
+    serv.close()
     db.close()
 })

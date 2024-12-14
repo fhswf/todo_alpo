@@ -76,13 +76,6 @@ Dies hat die Code coverage leider auch nicht verbessert. Ich entschied, dass die
 
 ## Frontend
 
-Ich hatte mich bisher nicht mit dem Frontend auseinander gesetzt. Damit dieses funktioniert mussten einige kleine Anpassungen vorgenommen werden. Hauptsaechlich die Mock Authorization war benoetigt.
+Ich hatte mich bisher nicht mit dem Frontend auseinander gesetzt. Damit dieses funktioniert mussten einige kleine Anpassungen vorgenommen werden. Hauptsaechlich die Mock Authorization war benoetigt. 
 
-
-
-
-
-
-## Finalization
-
-Ich entferne zum Schluss noch die Ausführung der GitHub actions auf meinem Branch. Dies war für Testzwecke konfiguriert worden um den Feedback Loop möglichst gering zu halten.
+Ich habe dann die E2E Tests hinzugefügt und noch ein paar kleine Änderungen vorgenommen, dass alles reibungslos funktioniert. Die Integration von Cypress war ein wenig frustrierend und hat am längsten gedauert.

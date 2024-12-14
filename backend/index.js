@@ -4,7 +4,6 @@ import DB from './db.js'
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 
-import { ObjectId } from 'mongodb';
 import { check, validationResult } from 'express-validator';
 import cookieParser from 'cookie-parser';
 import { getRandomValues } from 'crypto';
@@ -189,8 +188,6 @@ app.get('/todos/:id', authenticate,
     }
 );
 
-
-
 /** Update a todo by id.
  * @swagger
  * /todos/{id}:
@@ -230,11 +227,13 @@ app.put('/todos/:id', authenticate,
     async (req, res) => {
         let id = req.params.id;
         let todo = req.body;
-        if (todo._id !== id) {
+
+        if (todo._id.toString() !== id.toString()) {
             console.log("id in body does not match id in path: %s != %s", todo._id, id);
             res.sendStatus(400, "{ message: id in body does not match id in path}");
             return;
         }
+
         return db.update(id, todo)
             .then(todo => {
                 if (todo) {
@@ -290,6 +289,7 @@ app.post('/todos', authenticate, async (req, res) => {
     }
 
     // Validate required fields
+    allowedFields.splice(0, 1)
     const missingFields = allowedFields.filter(key => !(key in todo));
     if (missingFields.length > 0) {
         return res.status(400).json({ error: 'Bad Request', message: `Fehlende Felder: ${missingFields.join(', ')}` });
@@ -327,11 +327,6 @@ app.post('/todos', authenticate, async (req, res) => {
  */
 app.delete('/todos/:id', authenticate, async (req, res) => {
     let id = req.params.id;
-
-    // Validate the ID before calling db.delete.
-    if (!ObjectId.isValid(id)) {
-        return res.sendStatus(500); // Return 500 to match your test expectations
-    }
 
     try {
         const todo = await db.delete(id);

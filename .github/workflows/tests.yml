@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/abgabe-alex-p
   pull_request:
     branches:
       - main
@@ -26,3 +27,16 @@ jobs:
       - name: Run Tests
         working-directory: ./backend
         run: npm test
+      - name: npm install
+        working-directory: ./frontend
+        run: npm install
+      - name: Start backend server
+        run: |
+          cd backend
+          npm start &
+        # env:
+        #   MONGO_URL: mongodb://localhost:27017/testdb # Falls benötigt
+      - name: Run Cypress tests
+        run: |
+          cd frontend
+          npx cypress run

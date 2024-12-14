@@ -275,7 +275,7 @@ app.put('/todos/:id', authenticate,
  *       description: Serverfehler
  */
 app.post('/todos', authenticate, async (req, res) => {
-    const allowedFields = ['title', 'due', 'status']; // Define allowed fields
+    const allowedFields = ['_id', 'title', 'due', 'status']; // Define allowed fields
     const todo = req.body;
 
     // Check if request body is provided

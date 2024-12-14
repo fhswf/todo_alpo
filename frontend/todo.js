@@ -79,7 +79,8 @@ function saveTodo(evt) {
         fetch(API + "/" + _id, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": "Bearer 123"
             },
             body: JSON.stringify(todo)
         })
@@ -96,7 +97,8 @@ function saveTodo(evt) {
         fetch(API, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": "Bearer 123"
             },
             body: JSON.stringify(todo)
         })
@@ -133,7 +135,8 @@ function deleteTodo(id) {
         fetch(API + "/" + id, {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": "Bearer 123"
             }
         })
             .then(checkLogin)
@@ -153,7 +156,8 @@ function changeStatus(id) {
         fetch(API + "/" + id, {
             method: "PUT",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": "Bearer 123"
             },
             body: JSON.stringify(todo)
         })
@@ -169,7 +173,11 @@ function changeStatus(id) {
 }
 
 function loadTodos() {
-    return fetch(API)
+    return fetch(API, {
+            headers: {
+                "authorization": "Bearer 123"
+            }
+        })
         .then(checkLogin)
         .then(response => response.json())
         .then(response => {

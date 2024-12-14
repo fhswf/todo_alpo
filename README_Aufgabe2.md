@@ -74,6 +74,15 @@ Nun schlug die Quality gate durch die fehlende Anzahl an Code Coverage bei neuem
 
 Dies hat die Code coverage leider auch nicht verbessert. Ich entschied, dass die Anwendung, Ihrem Umfang entsprechend, gut genug getestet ist. 
 
+## Frontend
+
+Ich hatte mich bisher nicht mit dem Frontend auseinander gesetzt. Damit dieses funktioniert mussten einige kleine Anpassungen vorgenommen werden. Hauptsaechlich die Mock Authorization war benoetigt.
+
+
+
+
+
+
 ## Finalization
 
 Ich entferne zum Schluss noch die Ausführung der GitHub actions auf meinem Branch. Dies war für Testzwecke konfiguriert worden um den Feedback Loop möglichst gering zu halten.
